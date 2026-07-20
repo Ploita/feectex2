@@ -1,28 +1,28 @@
-# FEECTeX
+# FEECTeX2
 
-_FEECTeX é uma classe LaTeX para a escrita de teses e dissertações da Faculdade de Engeharia Elétrica e de Computação (FEEC) da Universidade Estadual de Campinas (UNICAMP)._
+_FEECTeX2 é uma classe LaTeX para a escrita de teses e dissertações da Faculdade de Engenharia Elétrica e de Computação (FEEC) da Universidade Estadual de Campinas (UNICAMP)._
 
-A presente implementação segue a **Instrução Normativa CCPG Nº 002/2021** disponível, por ora, no [site](https://www.prpg.unicamp.br/documentos-e-normas/normas/instrucoes-normativas/) da Pró-Reitoria de Pós-Graduação (PRPG).
+A presente implementação segue a **Instrução Normativa CCPG Nº 006/2025** disponível, por ora, no [site](https://prpg.unicamp.br/documentos-e-normas/normas/instrucoes-normativas/) da Pró-Reitoria de Pós-Graduação (PRPG).
 
-FEECTeX é elaborada a partir da classe abnTeX2 ([site](https://www.abntex.net.br) / [GitHub](https://www.github.com/abntex)).
+FEECTeX2 é uma evolução/derivação da classe [FEECTeX](https://github.com/fcpatrick/feectex), sendo também elaborada a partir da classe abnTeX2 ([site](https://www.abntex.net.br) / [GitHub](https://www.github.com/abntex)).
 
 A classe é implementada com o objetivo de propiciar ao aluno a escrita do texto final sem (muitas) preocupações. Junto com a classe é fornecido um _template_ de tese / dissertação, o qual pode ser utilizado como ponto de partida para a escrita de um novo trabalho.
 
 ## Como Usar
 
-Você pode utilizar o FEECTeX localmente em seu computador ou na nuvem. Neste último caso, recomenda-se o [Overleaf](https://www.overleaf.com/). Já para trabalhar localmente, é necessário ter uma distribuição TeX instalada em seu computador, _e.g._, o [MiKTeX](https://miktex.org/) e o [TeX Live](https://tug.org/texlive/), e um editor, como o TeXstudio ou o Visual Studio Code com a extensão LaTeX Workshop.
+Você pode utilizar o FEECTeX2 localmente em seu computador ou na nuvem. Neste último caso, recomenda-se o [Overleaf](https://www.overleaf.com/). Já para trabalhar localmente, é necessário ter uma distribuição TeX instalada em seu computador, _e.g._, o [MiKTeX](https://miktex.org/) e o [TeX Live](https://tug.org/texlive/), e um editor, como o TeXstudio ou o Visual Studio Code com a extensão LaTeX Workshop.
 
-A maneira mais direta de iniciar a redação do seu trabalho é a seguinte. 1) Faça o download do repositório ou do _release_ em formato .zip; 2) descompacte o arquivo, se necessário, e você estará pronto para começar!
+A maneira mais direta de iniciar a redação do seu trabalho é a seguinte: 1) Faça o download do repositório ou do _release_ em formato .zip; 2) descompacte o arquivo, se necessário, e você estará pronto para começar!
 
 ### Preenchendo as informações necessárias e gerando o arquivo PDF
 
 Abra o arquivo `principal.tex` e preencha as informações necessárias.
 
-Na declaração `\documentclass{...}`, diga se o trabalho é `mestrado` ou `doutorado`. Se o trabalho foi realizado em cotutela, informe isto na mesma declaração (basta remover o comentário). Por fim, se o trabalho não foi escrito em português, coloque como última opção a língua principal do documento. (ATENÇÃO: na atual versão, o FEECTeX não preenche as informações em língua estrangeira.)
+Certifique-se de carregar a classe usando `\documentclass{feectex2}`. Na declaração, diga se o trabalho é `mestrado` ou `doutorado`. Se o trabalho foi realizado em cotutela, informe isto na mesma declaração (basta remover o comentário). Por fim, se o trabalho não foi escrito em português, coloque como última opção a língua principal do documento. (**ATENÇÃO**: na atual versão, o FEECTeX2 não preenche as informações em língua estrangeira.)
 
-Em seguida, informe o título da obra (`\titulo{}`). Se o título ocupar mais de uma linha (o que é bastante comum) e for necessário ajustar sua exibição na capa e na folha de rosto, **não** utilize o comando `\\`. Faça uso do comando `\ajustetitulo{<valor>}` implementado na classe FEECTeX, onde `<valor>` é um número entre 0 e 1 (e.g., 0.9). `\ajustetitulo{}` pode ser declarado no arquivo `principal.tex` logo abaixo de `\titulo{}`.
+Em seguida, informe o título da obra (`\titulo{}`). Se o título ocupar mais de uma linha (o que é bastante comum) e for necessário ajustar sua exibição na capa e na folha de rosto, **não** utilize o comando `\\`. Faça uso do comando `\ajustetitulo{<valor>}` implementado na classe FEECTeX2, onde `<valor>` é um número entre 0 e 1 (e.g., 0.9). `\ajustetitulo{}` pode ser declarado no arquivo `principal.tex` logo abaixo de `\titulo{}`.
 
-Preencha, então, o seu nome, o número do seu RA, o título e o nome de sua orientadora / seu orientador, o título e o nome de sua coorientadora / seu coorientador (se não houver, comente ambas as linhas), a universidade, o instituto ou faculdade, a universidade onde foi realizada a cotutela (se não houver, comente a linha), o local da defesa; o dia, o mẽs e o ano da defesa; a área de concentração; e, por fim, os títulos e os nomes dos componentes da banca examinadora.
+Preencha, então, o seu nome, o número do seu RA, o título e o nome de sua orientadora / seu orientador, o título e o nome de sua coorientadora / seu coorientador (se não houver, comente ambas as linhas), a universidade, o instituto ou faculdade, a universidade onde foi realizada a cotutela (se não houver, comente a linha), o local da defesa; o dia, o mês e o ano da defesa; a área de concentração; e, por fim, os títulos e os nomes dos componentes da banca examinadora.
 
 ## Comandos
 
@@ -39,16 +39,16 @@ Preencha, então, o seu nome, o número do seu RA, o título e o nome de sua ori
 | \mesdefesa{&hellip;}                                | Mês em que foi realizada a defesa.                    |
 | \anodefesa{&hellip;}                                | Ano em que foi realizada a defesa.                    |
 | \areaconcentracao{&hellip;}                         | Área de concentração do trabalho.                     |
-| \bancaexaminadora{&hellip;}                         | Nomes dos componentes da banca examinadora. |
-| \palavraschave{&hellip;}                            | Palavras-chave (colocadas no resumo.)                 |
-| \keywords{&hellip;}                                 | _Keywords_ (colocadas no _abstract_.)                 |
+| \bancaexaminadora{&hellip;}                         | Nomes dos componentes da banca examinadora.           |
+| \palavraschave{&hellip;}                            | Palavras-chave (colocadas no resumo).                 |
+| \keywords{&hellip;}                                 | _Keywords_ (colocadas no _abstract_).                 |
 | \imprimircapa                                       | Imprime a capa do trabalho.                           |
 | \imprimirfolhaderosto                               | Imprime a folha de rosto do trabalho.                 |
 | \imprimirfichacatalografica{&hellip;}               | Imprime a ficha catalográfica (PDF).                  |
 | \imprimirfolhaaprovacao                             | Imprime a folha de aprovação.                         |
 | \imprimirdedicatoria                                | Imprime a dedicatória (opcional).                     |
 | \imprimiragradecimentos                             | Imprime os agradecimentos (opcional)[^1].             |
-| \imprimirepigrafe                                   | Imprime a epígrade (opcional).                        |
+| \imprimirepigrafe                                   | Imprime a epígrafe (opcional).                        |
 | \imprimirresumo                                     | Imprime o resumo e o _abstract_.                      |
 | \imprimirlistailustracoes                           | Imprime a lista de ilustrações (opcional).            |
 | \imprimirlistatabelas                               | Imprime a lista de tabelas (opcional).                |
@@ -56,7 +56,7 @@ Preencha, então, o seu nome, o número do seu RA, o título e o nome de sua ori
 | \imprimirlistasimbolos                              | Imprime a lista de símbolos (opcional).               |
 | \imprimirsumario                                    | Imprime o sumário.                                    |
 
-[^1]: A folha com os agradecimentos é opcional. No entanto, se você obteve apoio das agências de fomento (FAPESP, CNPQ, CAPES etc.), é bastante provável que você seja obrigado a agradecê-las aqui.
+[^1]: A folha com os agradecimentos é opcional. No entanto, se você obteve apoio das agências de fomento (FAPESP, CNPq, CAPES etc.), é bastante provável que você seja obrigado a agradecê-las aqui.
 
 Também foram criadas as versões em português para outros comandos. Veja abaixo a lista de equivalências.
 
@@ -73,11 +73,11 @@ Também foram criadas as versões em português para outros comandos. Veja abaix
 
 ## Versões
 
-### v2.0.0 (17/12/2025)
+### v1.0.0 (20/07/2026)
 
-* Release da versão simplificada.
-* Ajuste com base nos últimos apontamentos da secretaria.
+* Lançamento inicial da classe `feectex2`.
+* Atualização da estrutura com base nos apontamentos da PRPG.
 
 ## Isenção de Responsabilidade
 
-O presente trabalho foi realizado de maneira independente, não possuindo qualquer relação com a Faculdade de Engenharia Elétrica e de Computação (FEEC) ou com a Universidade Estadual de Campinas (UNICAMP).
+O presente trabalho foi realizado de maneira independente, não possuindo qualquer relação oficial com a Faculdade de Engenharia Elétrica e de Computação (FEEC) ou com a Universidade Estadual de Campinas (UNICAMP).

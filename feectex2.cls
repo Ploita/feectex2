@@ -1,5 +1,7 @@
-%% feectex.cls
-%% Copyright 2023 Patrick Franco Coutinho
+%% feectex2.cls
+%% Copyright 2026 Arthur Felipe dos Santos Fernandes
+%
+% This work is a derived work from `feectex.cls` by Patrick Franco Coutinho.
 %
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License, either version 1.3
@@ -11,14 +13,14 @@
 %
 % This work has the LPPL maintenance status `maintained'.
 %
-% The Current Maintainer of this work is Patrick Franco Coutinho.
+% The Current Maintainer of this work is Arthur Felipe dos Santos Fernandes.
 %
-% This work consists of the file feectex.cls.
+% This work consists of the file feectex2.cls.
 
 %!TeX encoding = utf-8
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{feectex}[2023/08/09 v2.0.0 Classe FEEC / Unicamp]
+\ProvidesClass{feectex2}[2026/07/20 v1.0.0 Classe FEEC / Unicamp (Modificada por Arthur Fernandes)]
 
 \RequirePackage{ifthen}
 
@@ -176,14 +178,18 @@
 \newcommand{\imprimiruniversidade}{}
 \newcommand{\universidade}[1]{\renewcommand{\imprimiruniversidade}{#1}}
 \newcommand{\imprimirfaculdade}{}
+\newcommand{\imprimirprogramapos}{}
 \newcommand{\faculdade}[1]{\renewcommand{\imprimirfaculdade}{#1}}
+\newcommand{\programa}[1]{\renewcommand{\imprimirprogramapos}{#1}}
 \instituicao{%
     \MakeUppercase{\imprimiruniversidade} \\%
-    \imprimirfaculdade%
+    \imprimirfaculdade \\%
+    \imprimirprogramapos%
 }
 
-\universidade{Universidade Estadual de Campinas}
-\faculdade{Faculdade de Engenharia Elétrica e de Computação}
+\universidade{Universidade Estadual de Campinas (UNICAMP)}
+\faculdade{Faculdade de Engenharia Elétrica e de Computação (FEEC)}
+\programa{Programa de Pós-Graduação em Engenharia Elétrica}
 
 % Definição da data de defesa. O ano que aparece na capa e
 % na folha de rosto é o ano da defesa.
@@ -225,7 +231,7 @@
             \SingleSpacing%
             \begin{minipage}{0.1\textwidth}%
                 \centering%
-                \includegraphics[width=1.5cm]{figuras/unicamp-logotipo.pdf}
+                \includegraphics[width=1.5cm]{figfeectexuras/unicamp-logotipo.pdf}
             \end{minipage}%
             \begin{minipage}{0.9\textwidth}%
                 \centering%
@@ -254,7 +260,7 @@
 
 % Montagem do preâmbulo.
 \preambulo{%
-    \ifthenelse{\boolean{mestrado}}{Dissertação}{}\ifthenelse{\boolean{doutorado}}{Tese}{} apresentada à Faculdade de Engenharia Elétrica e de Computação da Universidade Estadual de Campinas como parte dos requisitos exigidos para obtenção do título de \ifthenelse{\boolean{mestrado}}{Mestre}{}\ifthenelse{\boolean{doutorado}}{Doutor}{} em Engenharia Elétrica, na Área de \imprimirareaconcentracao \ifthenelse{\boolean{cotutela}}{no âmbito do Acordo de Cotutela firmado entre a Unicamp e a \imprimiruniversidadecotutela}.
+    \ifthenelse{\boolean{mestrado}}{Dissertação}{}\ifthenelse{\boolean{doutorado}}{Tese}{} apresentada à Faculdade de Engenharia Elétrica e de Computação da Universidade Estadual de Campinas (UNICAMP) como parte dos requisitos exigidos para obtenção do título de \ifthenelse{\boolean{mestrado}}{Mestre}{}\ifthenelse{\boolean{doutorado}}{Doutor}{} em Engenharia Elétrica, na Área de \imprimirareaconcentracao \ifthenelse{\boolean{cotutela}}{no âmbito do Acordo de Cotutela firmado entre a Unicamp e a \imprimiruniversidadecotutela}.
 }
 
 \newcommand{\marcar}[1]{
@@ -304,16 +310,10 @@
 
         \begin{minipage}{.475\textwidth}%
             \tiny%
-            ESTE TRABALHO CORRESPONDE À VERSÃO FINAL DA \ifthenelse{\boolean{mestrado}}{DISSERTAÇÃO}{}\ifthenelse{\boolean{doutorado}}{TESE}{} DEFENDIDA \ifthenelse{\boolean{autora}}{PELA ALUNA \MakeUppercase{\imprimirautora}}{}\ifthenelse{\boolean{autor}}{PELO ALUNO \MakeUppercase{\imprimirautor}}{}, E ORIENTADA \ifthenelse{\boolean{orientadora}}{PELA \MakeUppercase{\imprimirorientadora}}{}\ifthenelse{\boolean{orientador}}{PELO \MakeUppercase{\imprimirorientador}}{}
+            ESTE TRABALHO CORRESPONDE À VERSÃO FINAL DA \ifthenelse{\boolean{mestrado}}{DISSERTAÇÃO}{}\ifthenelse{\boolean{doutorado}}{TESE}{} DEFENDIDA.
         \end{minipage}
     \end{flushleft}
     \vspace{\fill}
-
-    \begin{center}
-        \SingleSpacing%
-        \ABNTEXchapterfont\large\imprimirlocal \\%
-        \ABNTEXchapterfont\large\ano
-    \end{center}
 }
 
 % Redefinição dos comandos relacionados à folha de rosto,
@@ -344,7 +344,8 @@
     \marcar{Ficha catalográfica}
     \IfFileExists{#1}{\includepdf{#1}}{%
         \noindent%
-        Ficha catalográfica (adicionar PDF)%
+        Ficha catalográfica (\href{https://www.sbu.unicamp.br/ficha-catalografica/}{Link para solicitar})%
+
     }%
     \cleardoublepage
 }
@@ -361,16 +362,27 @@
     \begin{folhadeaprovacao}%
         \ABNTEXchapterfont%
         \SingleSpacing%
-        \begin{flushleft}
-            \begin{minipage}[c]{\textwidth}%
-                \imprimirbancaexaminadora
-            \end{minipage}
-            \vfill
+        \begin{center}
+            \noindent{
+                \ABNTEXchapterfont\large
+                \ifthenelse{\boolean{autora}}{\imprimirautora}{}%
+                \ifthenelse{\boolean{autor}}{\imprimirautor}{}
+            }
+        \end{center}
 
-            \begin{minipage}{\textwidth}%
-                \fontsize{12.5pt}{14pt}\selectfont{A ata de defesa, com as respectivas assinaturas dos membros da Comissão Julgadora, encontra-se no SIGA (Sistema de Fluxo de Dissertação/Tese) e na Secretaria de Pós-Graduação da Faculdade de Engenharia Elétrica e de Computação.}
-            \end{minipage}
-        \end{flushleft}
+        \vspace{5em}%
+
+        \noindent{\ifthenelse{\boolean{mestrado}}{Dissertação}{}\ifthenelse{\boolean{doutorado}}{Tese}{} apresentada ao \imprimirprogramapos, defendida na data de \datadefesa}\\%
+
+        \vspace{2em}%
+        
+        \noindent{Composição da Comissão Examinadora:\\%
+        \vspace{2em}\\%
+        \begin{minipage}[l]{0.75\textwidth}%
+            \begin{flushleft}
+                \imprimirbancaexaminadora
+            \end{flushleft}
+        \end{minipage}}
     \end{folhadeaprovacao}
     \cleardoublepage
 }
@@ -386,6 +398,12 @@
 % Dedicatória (opcional).
 \renewenvironment{dedicatoria}{
     \marcar{Dedicatória}
+    \begin{center}
+        \noindent{
+            \ABNTEXchapterfont\huge
+            Dedicatória
+        }
+    \end{center}
     \vspace*{-\topskip}%
     \vspace*{\fill}%
     \begin{flushright}%
@@ -407,6 +425,12 @@
 % Epígrafe (opcional).
 \renewenvironment{epigrafe}{
     \marcar{Epígrafe}
+    \begin{center}
+        \noindent{
+            \ABNTEXchapterfont\huge
+            Epígrafe
+        }
+    \end{center}
     \vspace*{\fill}%
     \begin{flushright}%
 }{%
