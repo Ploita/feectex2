@@ -40,6 +40,11 @@ Preencha, então, o seu nome, o número do seu RA, o título e o nome de sua ori
 | \anodefesa{&hellip;}                                | Ano em que foi realizada a defesa.                    |
 | \areaconcentracao{&hellip;}                         | Área de concentração do trabalho.                     |
 | \bancaexaminadora{&hellip;}                         | Nomes dos componentes da banca examinadora.           |
+| \usogramatica                                       | Declara uso de IAG na revisão gramatical.             |
+| \usoestatistica                                     | Declara uso de IAG em procedimentos estatísticos.     | 
+| \usocodigo                                          | Declara uso de IAG em códigos de programação.         | 
+| \usooutros{&hellip;}                                | Declara uso de IAG em outras atividades.              | 
+| \adicionarferramentaIA{&hellip;}{&hellip;}{&hellip;}                        | Declara a ferramenta de IAG utilizada                 | 
 | \palavraschave{&hellip;}                            | Palavras-chave (colocadas no resumo).                 |
 | \keywords{&hellip;}                                 | _Keywords_ (colocadas no _abstract_).                 |
 | \imprimircapa                                       | Imprime a capa do trabalho.                           |
@@ -55,6 +60,7 @@ Preencha, então, o seu nome, o número do seu RA, o título e o nome de sua ori
 | \imprimirlistaabreviaturassiglas                    | Imprime a lista de abreviaturas e siglas (opcional).  |
 | \imprimirlistasimbolos                              | Imprime a lista de símbolos (opcional).               |
 | \imprimirsumario                                    | Imprime o sumário.                                    |
+| \imprimirdeclaracaoia                               | Imprime a declaração de uso de IAG.                   |
 
 [^1]: A folha com os agradecimentos é opcional. No entanto, se você obteve apoio das agências de fomento (FAPESP, CNPq, CAPES etc.), é bastante provável que você seja obrigado a agradecê-las aqui.
 
@@ -72,6 +78,10 @@ Também foram criadas as versões em português para outros comandos. Veja abaix
 (*) O comando `\incluir{&hellip;}` verifica de antemão se o arquivo existe.
 
 ## Versões
+
+### v1.1.0 (14/09/2026)
+
+* Atualização Ofício Circular PRPG no.001/2026
 
 ### v1.0.0 (20/07/2026)
 
