@@ -11,7 +11,7 @@
 %    french,
 %    spanish,
     brazil
-]{feectex}
+]{feectex2}
 
 % Pacotes adicionais (adicione ou remova conforme sua
 % necessidade). Visite o site https://www.ctan.org para
@@ -65,6 +65,9 @@
 % \coorientadora{Profa. Dra. Nome da Coorientadora}
 \coorientador{Prof. Dr. Nome do Coorientador}
 
+% É a versão final?
+\versaofinal
+
 % Qual é o nome da universidade de cotutela? Se houver,
 % modificar a opção na declaração da classe acima
 % (\documentclass(...)) e remover comentário abaixo.
@@ -101,6 +104,17 @@
     % Nome do Quarto Membro
 }
 
+% Para quais atividades foram utilizados recursos de IA Generativa?
+\usogramatica       % Ativa a caixa de revisão gramatical
+\usoestatistica     % Ativa a caixa de procedimentos estatísticos
+\usocodigo          % Ativa a caixa de código de programação
+\usooutros{Geração de diagramas e ilustrações auxiliares} % Deixe em branco se não houver
+
+% Adicione quantas ferramentas forem necessárias:
+% Repeitando a sequência {Nome da Ferramenta}{Versão}{usos da ferramenta}
+\adicionarferramentaIA{ChatGPT}{GPT-4o}{revisão do abstract em inglês e formatação de tabelas}
+\adicionarferramentaIA{GitHub Copilot}{1.5.0}{otimização e autocompletar rotinas em Python}
+
 \begin{document}
     % \hyphenation{}
 
@@ -135,6 +149,7 @@
 
     \anexos
     \partanexos
-    \incluir{anexos/anexo-A}
+    \imprimirdeclaracaoia
+    \incluir{anexos/anexo-B}
 
 \end{document}

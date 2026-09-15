@@ -174,6 +174,11 @@
     \setboolean{coorientadora}{true}
 }
 
+% Criação de \versaofinal
+\newboolean{versaofinal}
+\setboolean{versaofinal}{false}
+\newcommand{\versaofinal}{\setboolean{versaofinal}{true}}
+
 % Definição da universidade e da faculdade / instituto.
 \newcommand{\imprimiruniversidade}{}
 \newcommand{\universidade}[1]{\renewcommand{\imprimiruniversidade}{#1}}
@@ -231,7 +236,7 @@
             \SingleSpacing%
             \begin{minipage}{0.1\textwidth}%
                 \centering%
-                \includegraphics[width=1.5cm]{figfeectexuras/unicamp-logotipo.pdf}
+                \includegraphics[width=1.5cm]{figuras/unicamp-logotipo.pdf}
             \end{minipage}%
             \begin{minipage}{0.9\textwidth}%
                 \centering%
@@ -308,10 +313,11 @@
         }{}
         \vspace{2cm}
 
+        \ifthenelse{\boolean{versaofinal}}{
         \begin{minipage}{.475\textwidth}%
             \tiny%
             ESTE TRABALHO CORRESPONDE À VERSÃO FINAL DA \ifthenelse{\boolean{mestrado}}{DISSERTAÇÃO}{}\ifthenelse{\boolean{doutorado}}{TESE}{} DEFENDIDA.
-        \end{minipage}
+        \end{minipage}}{}
     \end{flushleft}
     \vspace{\fill}
 }
@@ -360,6 +366,7 @@
 % Estilização da folha de aprovação.
 \renewcommand{\imprimirfolhaaprovacao}{%
     \begin{folhadeaprovacao}%
+        \setlength{\parindent}{0cm}
         \ABNTEXchapterfont%
         \SingleSpacing%
         \begin{center}
@@ -370,14 +377,16 @@
             }
         \end{center}
 
-        \vspace{5em}%
+        \vspace{5em}
 
-        \noindent{\ifthenelse{\boolean{mestrado}}{Dissertação}{}\ifthenelse{\boolean{doutorado}}{Tese}{} apresentada ao \imprimirprogramapos, defendida na data de \datadefesa}\\%
+        {\ifthenelse{\boolean{mestrado}}{Dissertação}{}\ifthenelse{\boolean{doutorado}}{Tese}{} apresentada ao \imprimirprogramapos, defendida na data de \datadefesa}%
 
         \vspace{2em}%
         
-        \noindent{Composição da Comissão Examinadora:\\%
-        \vspace{2em}\\%
+        \noindent{Composição da Comissão Examinadora:%
+        
+        \vspace{2em}%
+        
         \begin{minipage}[l]{0.75\textwidth}%
             \begin{flushleft}
                 \imprimirbancaexaminadora
@@ -519,6 +528,83 @@
 % Novo comando para inclusão de arquivos .tex
 \newcommand{\incluir}[1]{%
     \IfFileExists{#1}{\include{#1}}{}
+}
+
+% --- COMANDOS DE CONFIGURAÇÃO DA DECLARAÇÃO DE IA ---
+\newboolean{iaGramatica}\setboolean{iaGramatica}{false}
+\newboolean{iaEstatistica}\setboolean{iaEstatistica}{false}
+\newboolean{iaCodigo}\setboolean{iaCodigo}{false}
+
+\newcommand{\usogramatica}{\setboolean{iaGramatica}{true}}
+\newcommand{\usoestatistica}{\setboolean{iaEstatistica}{true}}
+\newcommand{\usocodigo}{\setboolean{iaCodigo}{true}}
+
+\newcommand{\imprimiriaoutros}{}
+\newcommand{\usooutros}[1]{\renewcommand{\imprimiriaoutros}{#1}}
+
+\newcommand{\listaferramentasIA}{}
+\newcommand{\adicionarferramentaIA}[3]{%
+    \expandafter\gdef\expandafter\listaferramentasIA\expandafter{%
+        \listaferramentasIA
+        \item \textbf{#1} (Versão: #2), utilizada para fins de #3.%
+    }%
+}
+
+% Redefinição do ambiente declaracaoia.
+\newcommand{\imprimirdeclaracaoia}{}
+\newenvironment{declaracaoia}{%
+    \clearpage
+    \pagestyle{plain}
+    \marcar{Declaração IA Generativa}
+}{\clearpage}
+
+\renewcommand{\imprimirdeclaracaoia}{%
+    \begin{declaracaoia}%
+    \chapter{Declaração de Uso de Inteligência Artificial Generativa}
+    \setlength{\parindent}{1.25cm}
+
+Eu, \textbf{\imprimirautor}, \ifthenelse{\boolean{autora}}{autora}{autor} do trabalho intitulado \textbf{``\imprimirtitulo''}, apresentado ao \textbf{\imprimirprogramapos} da Universidade Estadual de Campinas (Unicamp), declaro, para os devidos fins de direito e de integridade acadêmica, ter utilizado ferramentas de inteligência artificial generativa (IAG) de forma estritamente auxiliar no desenvolvimento da presente pesquisa e/ou na redação deste trabalho.
+
+
+As seguintes atividades específicas foram realizadas com o apoio das ferramentas de IAG, sob plena supervisão humana, validação crítica e responsabilidade \ifthenelse{\boolean{autora}}{da autora}{do autor}:
+
+\begin{itemize}
+    \item[\ifthenelse{\boolean{iaGramatica}}{$\blacksquare$}{$\square$}] Revisão gramatical e edição textual;
+    \item[\ifthenelse{\boolean{iaEstatistica}}{$\blacksquare$}{$\square$}] Auxílio na descrição, estruturação ou execução de procedimentos estatísticos;
+    \item[\ifthenelse{\boolean{iaCodigo}}{$\blacksquare$}{$\square$}] Suporte na geração ou otimização de códigos de programação;
+    \item[\ifthenelse{\equal{\imprimiriaoutros}{}}{$\square$}{$\blacksquare$}] Outras atividades (especificar): \imprimiriaoutros
+\end{itemize}
+
+
+As ferramentas de Inteligência Artificial Generativa utilizadas foram:
+
+\begin{enumerate}
+    \ifx\listaferramentasIA\empty
+        \item Nenhuma ferramenta específica declarada.
+    \else
+        \listaferramentasIA
+    \fi
+\end{enumerate}
+
+Em conformidade com a Deliberação CONSU-A-005/2026, declaro estar ciente de que a responsabilidade pelo conteúdo final, veracidade das informações e conclusões deste trabalho é integralmente minha. As ferramentas de inteligência artificial generativa utilizadas não são reconhecidas como coautoras e não possuem qualquer responsabilidade sobre os resultados, dados e conteúdos apresentados.
+
+\vfill
+
+\hfill Campinas, \datadefesa.
+
+\vspace{1cm}
+
+    \begin{center}
+    \textbf{\imprimirautor}
+
+    \vspace{1cm}
+
+    \textbf{\ifthenelse{\boolean{orientadora}}{\imprimirorientadora}{\imprimirorientador}}
+    \end{center}
+
+    \end{declaracaoia}
+    \cleardoublepage
+    \clearpage
 }
 
 % Novos comandos para citações.
